@@ -8,9 +8,7 @@ async function getData() {
     )
     const weatherData = await response.json()
     console.log(weatherData)
-    const temp = document.createElement('p')
-    temp.textContent=weatherData.main.temp
-    body.appendChild(temp)
+    return weatherData
 }
 
 // form.addEventListener('submit', (event) => {
