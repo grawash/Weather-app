@@ -11,10 +11,4 @@ async function getData() {
     return weatherData
 }
 
-// form.addEventListener('submit', (event) => {
-//     event.preventDefault()
-//     getData()
-
-// })
-
 export default getData;

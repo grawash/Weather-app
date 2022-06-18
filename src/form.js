@@ -1,5 +1,10 @@
 import getData from "./data"
 import svg from "./img/weather-svgrepo-com.svg"
+import clouds from "./img/pexels-magda-ehlers-2114014.jpg"
+import rain from "./img/pexels-veeterzy-39811.jpg"
+import clear from "./img/pexels-francesco-ungaro-281260.jpg"
+import mist from "./img/pexels-lumn-167699.jpg"
+
 const body = document.querySelector('body')
 function createContainer(){
     const container = document.createElement('div');
@@ -55,14 +60,24 @@ function createContent(container){
 function displayWeather(container){
     const weatherInfo = document.createElement('div')
     weatherInfo.classList.add('weatherInfo')
+    const weatherIcon = document.createElement('img')
+    const description = document.createElement('p')
     const temperature = document.createElement('p')
+    const feelsLike = document.createElement('p')
     const city = document.createElement('h1')
     getData().then((obj) =>{
         city.textContent=obj.name
-        temperature.textContent=parseInt(obj.main.temp)+"°"
+        description.textContent=obj.weather[0].description
+        temperature.textContent='temp: '+parseInt(obj.main.temp)+"°"
+        feelsLike.textContent='feels like: '+parseInt(obj.main.feels_like)+"°"
+        chooseBackground(obj.weather[0].main,weatherInfo) 
+        weatherIcon.src=`https://openweathermap.org/img/wn/${obj.weather[0].icon}@2x.png`
     })
+    weatherInfo.appendChild(weatherIcon)
     weatherInfo.appendChild(city)
+    weatherInfo.appendChild(description)
     weatherInfo.appendChild(temperature)
+    weatherInfo.appendChild(feelsLike)
     container.appendChild(weatherInfo)
 }
 function removeContent(container){
@@ -70,6 +85,18 @@ function removeContent(container){
     if(weatherInfo){
         weatherInfo.remove()
     }
+}
+function chooseBackground(weatherType,weatherInfo){
+    if (weatherType==="Rain"){
+        body.style.background=`url(${rain})`
+    }else if (weatherType==="Clouds"){
+        body.style.background=`url(${clouds})`
+    }else if(weatherType==="Clear"){
+        body.style.background=`url(${clear})`
+    }else if(weatherType==="Misty"){
+        body.style.background=`url(${mist})`
+    }
+    body.style.backgroundSize="cover"
 }
 
 export default createContainer
