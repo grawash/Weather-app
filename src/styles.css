@@ -13,7 +13,7 @@ body{
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-rows:1fr 10fr 1fr;
+    grid-template-rows:2fr 12fr 1fr;
     grid-template-columns: 1fr 3fr;
 }
 .header{
@@ -60,4 +60,13 @@ button{
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
+    background-repeat: no-repeat;
+    background-size: 10px 10px;
+    color: white;
+    box-shadow:2px 0px 5px rgba(0, 0, 0, 0.274);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2rem;
+    padding:2rem;
 }
