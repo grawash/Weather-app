@@ -12,8 +12,7 @@ function createContainer(){
     container.classList.add('container')
     body.appendChild(container)
     createHeader(container)
-    //createContent(container)
-    //createFooter(container)
+    createFooter(container)
 }
 
 function createForm(header){
@@ -140,4 +139,13 @@ function displayForecast(container){
     forecast.appendChild(forecastList)
     container.appendChild(forecast)
 }
+function createFooter(container){
+    const footer = document.createElement('div')
+    const footerText = document.createElement('p')
+    footerText.textContent='created by @grawash'
+    footer.classList.add('footer')
+    footer.appendChild(footerText)
+    container.appendChild(footer)
+}
+
 export default createContainer
