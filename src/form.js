@@ -1,4 +1,5 @@
 import getData from "./data"
+import getForecast from "./forecast"
 import svg from "./img/weather-svgrepo-com.svg"
 import clouds from "./img/pexels-magda-ehlers-2114014.jpg"
 import rain from "./img/pexels-veeterzy-39811.jpg"
@@ -31,6 +32,7 @@ function createForm(header){
         event.preventDefault()
         removeContent(container)
         displayWeather(container)
+        displayForecast(container)
     })
 }
 function createHeader(container){
@@ -82,8 +84,10 @@ function displayWeather(container){
 }
 function removeContent(container){
     const weatherInfo = document.querySelector('.weatherInfo')
+    const forecast = document.querySelector('.forecast')
     if(weatherInfo){
         weatherInfo.remove()
+        forecast.remove()
     }
 }
 function chooseBackground(weatherType,weatherInfo){
@@ -99,4 +103,41 @@ function chooseBackground(weatherType,weatherInfo){
     body.style.backgroundSize="cover"
 }
 
+function displayForecast(container){
+    const forecast = document.createElement('div')
+    forecast.classList.add('forecast')
+    const forecastText = document.createElement('h1')
+    forecastText.textContent='Daily forecast:'
+    const forecastList = document.createElement('div')
+    forecastList.classList.add('forecastList')
+    getForecast().then((obj) =>{
+        const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        let currentDay = new Date(obj.list[0].dt * 1000)
+        obj.list.forEach(ls => {
+            let day = new Date(ls.dt * 1000)
+            if (day.getDay() != currentDay.getDay()){
+                const forecastCard = document.createElement('div')
+                const forecastIcon = document.createElement('img')
+                const dayOfWeek = document.createElement('p')
+                const forecastWeather = document.createElement('p')
+                const forecastTemp = document.createElement('p')
+                forecastCard.classList.add('forecastCard')
+                forecastIcon.src=`https://openweathermap.org/img/wn/${ls.weather[0].icon}@2x.png`
+                dayOfWeek.textContent = weekday[day.getDay()]
+                forecastWeather.textContent= ls.weather[0].description
+                forecastTemp.textContent= parseInt(ls.main.temp)+"°"
+                forecastList.appendChild(forecastCard)
+                forecastCard.appendChild(forecastIcon)
+                forecastCard.appendChild(forecastWeather)
+                forecastCard.appendChild(dayOfWeek)
+                forecastCard.appendChild(forecastTemp)
+                console.log(ls.dt_txt)
+                currentDay=day
+            }
+        })
+    })
+    forecast.appendChild(forecastText)
+    forecast.appendChild(forecastList)
+    container.appendChild(forecast)
+}
 export default createContainer
