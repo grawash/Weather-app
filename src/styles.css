@@ -56,6 +56,10 @@ button{
     border-radius: 25px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.479);
 }
+button:hover{
+    cursor: pointer;
+    background-color: rgb(218, 216, 216);
+}
 .weatherInfo{
     grid-column-start: 1;
     grid-column-end: 2;
@@ -83,6 +87,7 @@ button{
     display: flex;
     font-size: 1rem;
     justify-content: space-around;
+    padding-top: 1rem;
 }
 .forecastCard{
     display: flex;
@@ -90,4 +95,16 @@ button{
     background-color: rgba(255, 255, 255, 0.164);
     border-radius: 25px;
     padding: 0.5rem;
+}
+.footer{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 3;
+    background-color: rgb(24, 24, 24);
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
 }
