@@ -1,3 +1,4 @@
-import './styles.css'
-import createContainer from "./form"
+import './styles.css';
+import createContainer from './form';
+
 createContainer();
